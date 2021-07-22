@@ -3,7 +3,7 @@
 
 
 
-# Check for MVVM # 
+# For MVVM check below links:--
 
 https://medium.com/@dev.omartarek/mvp-vs-mvvm-in-ios-using-swift-337884d4fc6f 
 https://www.youtube.com/watch?v=L634o_Rjly0
