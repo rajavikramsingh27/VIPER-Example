@@ -39,30 +39,61 @@ Hard to maintain, when the project get growing the controller will be chaotic
 # Model View Presenter (MVP)
 
 The View here is the same as the view in Model-View-Controller pattern, except that the View should not interact with the Model directly, the View can interact only with the presenter
+
 The Model is also the same as the model in Model-View-Controller pattern, but the Model also can not interact directly with the View, it should interact only with the Presenter
+
 The Presenter is the new layer introduced by Model-View-Presenter pattern, as illustrated in “Figure 4”, the Presenter is an intermediate layer that handle the communication between View and Model. it solved a lot of MVC problems like testability, maintainability, scalability.
 
 
 # Presenter responsibilities
 It should handle the presentation logic in general. It is responsible for what should be shown and when based on presentation conditions
-Most of times the presenter handle the business logic also, but in applications that have huge business logic, you should add a business layer for your business. Let’s agree that architecture pattern are not a Bible, you can custom it based in your application and its business, but without violating the patterns theory’s
+
+Most of times the presenter handle the business logic also, but in applications that have huge business logic, you should add a business layer for your business. 
+Let’s agree that architecture pattern are not a Bible, you can custom it based in your application and its business, but without violating the patterns theory’s
+
 The presenter acts as an intermediate layer between View and Model, so it can handle the inputs received from the controller and doing some operation on them like reformatting the data, validate input or filter the data ,…etc. Also the Presenter should update Controller when the model changed in order to update the View
 
 
 After this tour in MVP implementation, let’s discuss about it
 
-It is very obvious now that, the ViewController responsibilities are reduced compared to MVC. The ViewController now is responsible for only UI functions like updating UI, animation, presenting views, …etc.
+It is very obvious now that, the ViewController responsibilities are reduced compared to MVC. 
+The ViewController now is responsible for only UI functions like updating UI, animation, presenting views, …etc.
 The Presenter now separate the presentation and business logic from the View, and this makes MVP has the ability to scale up safely, this will make your code also maintainable and testable(actually it is not fully testable using this implementation). But still there are some problems here!!!
 
-So, what is the current implementation problem?
-The problem of implmenting this approach:
+# MVP problem
+
 There are still a tight coupling between View and Presenter.
 The Presenter is not reusable component, because it depends on a specific type, for example suppose we have register form with the same view as the update profile and the same logic, we will not able to reuse the Presenter because it depends on UpdateProfileViewController instance not RegisterViewController.
 The Presenter will not be fully testable because it depend on UIKit elements and UIKit elements can not be mocked.
 
 
-What is the correct approach to implement MVP?
+# What is the correct approach to implement MVP?
 We can not completely decouple the view from the Presenter but we defiantly can handle it somehow to be injected in reusable and testable way.
 The solution for the above three problems is to use Protocols.
+
+
+# View-Model:- 
+
+The ViewModel is at the heart of the MVVM architectural pattern and provides the connection between the business/presentation logic and the View/ViewController . 
+The View (UI) responds to user input by passing input data (defined by the Model) to the ViewModel. In turn, the ViewModel evaluates the input data and responds with an appropriate UI presentation according business logic workflow.
+
+The ViewModel responsibilities are the same as the Presenter in MVP in addition to two points:
+
+The ViewModel should be hocked up with View via Data Binding paradigms, the most widely used is Reactive Programming, there are many frameworks which implements 
+Reactive programming like RxSwift, ReactiveCocoa and Bond
+
+The ViewModel should represent the View’s current state at any time, and this means that, the ViewModel is a model that represents the View literally(for example 
+if we have login screen that has two UITextfields for username and password. Then, the ViewModel should have two String properties which represents the username 
+Textfield and password TextField) and this is very easy when you implement it using any reactive framework or using any data binding method
+
+
+
+
+
+
+
+
+
+
 
 
